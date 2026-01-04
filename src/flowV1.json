@@ -69,44 +69,28 @@
   "ui": {
     "topicChips": [
       {
-        "id": "chip_summary",
-        "label": "Summary",
-        "goto": "n_summary_01"
-      },
-      {
         "id": "chip_experience",
         "label": "Experience",
-        "goto": "n_exp_01"
+        "goto": "n_exp_01",
+        "utterance": "Can you walk me through your experience and what you actually owned end-to-end?"
       },
       {
         "id": "chip_projects",
         "label": "Projects",
-        "goto": "n_proj_01"
-      },
-      {
-        "id": "chip_skills",
-        "label": "Skills",
-        "goto": "n_skills_01"
+        "goto": "n_proj_01",
+        "utterance": "Show me your flagship projects with proof."
       },
       {
         "id": "chip_publications",
         "label": "Publications",
-        "goto": "n_pubs_01"
-      },
-      {
-        "id": "chip_education",
-        "label": "Education",
-        "goto": "n_edu_01"
+        "goto": "n_pubs_01",
+        "utterance": "Which publications validate your systems, and what do they contribute?"
       },
       {
         "id": "chip_contact",
         "label": "Contact",
-        "goto": "n_contact_01"
-      },
-      {
-        "id": "chip_fast",
-        "label": "60-sec overview",
-        "goto": "n_fast_01"
+        "goto": "n_contact_01",
+        "utterance": "How can I contact you, and where can I see your work?"
       }
     ],
     "alwaysVisibleControls": [
@@ -243,12 +227,14 @@
         {
           "id": "o_sum_exp",
           "label": "Walk through experience",
-          "goto": "n_exp_01"
+          "goto": "n_exp_01",
+          "utterance": "Can you tell me about your previous experience."
         },
         {
-          "id": "o_sum_skills",
-          "label": "What’s your tech stack?",
-          "goto": "n_skills_01"
+          "id": "show_publications",
+          "label": "Show publications",
+          "goto": "n_pubs_01",
+          "utterance": "Show me some of your publications."
         }
       ],
       "evidence": [
@@ -256,6 +242,16 @@
           "type": "link",
           "label": "CV (PDF)",
           "src": "CV_Georgios_Terzoglou.pdf"
+        },
+        {
+          "type": "link",
+          "label": "GitHub",
+          "src": "https://github.com/Giorgos-Terzoglou"
+        },
+        {
+          "type": "link",
+          "label": "LinkedIn",
+          "src": "https://www.linkedin.com/in/georgios-terzoglou-792722348/"
         }
       ]
     },
@@ -268,22 +264,20 @@
         {
           "id": "o_exp_quento",
           "label": "Quento (RAG + production pipelines)",
-          "goto": "n_exp_quento_01"
+          "goto": "n_exp_quento_01",
+          "utterance": "Can you tell more about your experience in Quento?"
         },
         {
           "id": "o_exp_certh",
-          "label": "CERTH (CV + EU projects + publication)",
-          "goto": "n_exp_certh_01"
+          "label": "CERTH (EU R&D → real delivery)",
+          "goto": "n_exp_certh_01",
+          "utterance": "Can you tell more about your experience in CERTH?"
         },
         {
           "id": "o_exp_tt",
           "label": "Traffic Technique (time-series + deployment)",
-          "goto": "n_exp_tt_01"
-        },
-        {
-          "id": "o_exp_ownership",
-          "label": "What do you own end-to-end?",
-          "goto": "n_exp_ownership_01"
+          "goto": "n_exp_tt_01",
+          "utterance": "Can you tell more about your experience in Traffic Technique?"
         }
       ],
       "evidence": []
@@ -311,43 +305,71 @@
       "id": "n_exp_quento_01",
       "type": "answer",
       "section": "experience",
-      "bot": "At Quento I build and maintain production ML pipelines and RAG-based chatbots. The focus is reliability, latency, throughput, and guardrails — not just demos.",
+      "bot": "At Quento, I work on production ML systems where the hard part isn’t the model — it’s everything around it.\n\nWhat I do\n• Build and maintain end-to-end pipelines for client-facing systems, mostly RAG chatbots.\n• Treat RAG as an engineering problem: retrieval quality, guardrails, latency, and failure modes.\n\nProduction realities\n• Translate ambiguous client requests into concrete system requirements.\n• Make cost / latency / quality trade-offs and push back on unrealistic expectations.\n• Ensure predictable behavior under messy data, tight latency, and reliability constraints.",
       "options": [
         {
-          "id": "o_q_rag",
-          "label": "RAG design choices",
-          "goto": "n_rag_01"
-        },
-        {
-          "id": "o_q_prod",
-          "label": "How do you deploy/monitor?",
-          "goto": "n_mlop_01"
-        }
-      ],
-      "evidence": []
-    },
-    {
-      "id": "n_exp_certh_01",
-      "type": "answer",
-      "section": "experience",
-      "bot": "At CERTH I worked on drone-based industrial inspection and other CV/RAG initiatives, led datasets and modeling, and authored an IEEE publication. The work emphasized research-to-production transitions and measurable impact.",
-      "options": [
-        {
-          "id": "o_c_solar",
-          "label": "Show the Solar Panel IEEE project",
-          "goto": "n_proj_solar_01"
-        },
-        {
-          "id": "o_c_cv",
-          "label": "Other CV work (overview)",
-          "goto": "n_skills_cv_01"
+          "id": "o_quento_back_exp",
+          "label": "Back to experience",
+          "goto": "n_exp_01",
+          "utterance": "Back to experience."
         }
       ],
       "evidence": [
         {
           "type": "link",
-          "label": "IEEE Solar Panel Paper",
+          "label": "CV (PDF)",
+          "src": "CV_Georgios_Terzoglou.pdf"
+        },
+        {
+          "type": "link",
+          "label": "GitHub profile",
+          "src": "https://github.com/Giorgos-Terzoglou"
+        }
+      ]
+    },
+    {
+      "id": "n_exp_certh_01",
+      "type": "answer",
+      "section": "experience",
+      "bot": "CERTH — I worked across EU-funded R&D where the job wasn’t “train a model”, it was to deliver usable systems.\n\nScope\n• Computer Vision: drone-based industrial inspection (RGB + thermal), detection/segmentation/classification, and reliability under messy real capture.\n• NLP/RAG: retrieval pipelines and chatbot-style systems with correctness/guardrails.\n• Tabular ML + time series: predictive modeling where non-stationarity and drift are the real problems.\n\nResearch + delivery\n• I produced peer-reviewed outputs, but I wasn’t stuck in paper-land.\n• I collaborated with industry partners (Samsung, TITAN) to translate prototypes into deployable product-grade components: constraints, latency, robustness, integration, and failure handling.\n\nIf you want proof: use Projects/Publications — they connect to concrete artifacts.",
+      "options": [
+        {
+          "id": "o_certh_back_exp",
+          "label": "Back to experience",
+          "goto": "n_exp_01",
+          "utterance": "Back to experience."
+        }
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "PVGnosis project site (EU project)",
+          "src": "https://pvgnosis.eu/"
+        },
+        {
+          "type": "link",
+          "label": "MEMENTOES project site (EU project)",
+          "src": "https://mementoes.eu/#"
+        },
+        {
+          "type": "link",
+          "label": "INTERPRETER project site (H2020)",
+          "src": "https://www.interpreter-h2020.eu/"
+        },
+        {
+          "type": "link",
+          "label": "IEEE publication (Solar Panel Defect Detection)",
           "src": "https://ieeexplore.ieee.org/document/10167960"
+        },
+        {
+          "type": "link",
+          "label": "IEEE publication (Game Assets services)",
+          "src": "https://ieeexplore.ieee.org/abstract/document/10976973"
+        },
+        {
+          "type": "link",
+          "label": "Elsevier publication (Digital heritage digital twins)",
+          "src": "https://www.sciencedirect.com/science/article/pii/S2212054825000530"
         }
       ]
     },
@@ -355,17 +377,13 @@
       "id": "n_exp_tt_01",
       "type": "answer",
       "section": "experience",
-      "bot": "At Traffic Technique I built time-series forecasting models (LSTM/Transformer) and helped productionize retraining/monitoring workflows. The system scaled to 45+ intersections and supported broader city-wide deployment.",
+      "bot": "At Traffic Technique, the company’s goal is to adapt traffic light behavior based on real traffic flows instead of static timing plans.\n\nI built and owned an end-to-end adaptive traffic prediction system that moved from experimentation into core company infrastructure.\n\nWhat I did\n• Designed the full pipeline: data ingestion → preprocessing → forecasting → evaluation → deployment.\n• Implemented time-series models to predict how many vehicles will pass through each road segment.\n• Improved prediction accuracy compared to static and heuristic approaches, enabling better signal timing decisions.\n\nProduction realities\n• Set up monitoring to detect performance decay and data drift.\n• Implemented automated retraining and CI/CD-style pipelines to keep models reliable over time.\n• Supported scaling from a small local deployment to hundreds of nodes across multiple cities, contributing to reduced congestion.",
       "options": [
         {
-          "id": "o_tt_project",
-          "label": "Open Traffic Technique project view",
-          "goto": "n_proj_tt_01"
-        },
-        {
-          "id": "o_tt_timeseries",
-          "label": "Time-series approach details",
-          "goto": "n_timeseries_01"
+          "id": "o_tt_back_exp",
+          "label": "Back to experience",
+          "goto": "n_exp_01",
+          "utterance": "Back to experience."
         }
       ],
       "evidence": [
@@ -406,31 +424,28 @@
       "id": "n_pubs_01",
       "type": "question",
       "section": "publications",
-      "bot": "Pick a paper. No summaries, no fluff — just the point.",
+      "bot": "These are applied publications tied to real systems. Pick one and I’ll explain what problem it solves and why it matters.",
       "options": [
         {
           "id": "o_pubs_game_assets",
           "label": "AI Services for Customizable Game Assets (IEEE)",
-          "goto": "n_pub_game_assets_01"
+          "goto": "n_pub_game_assets_01",
+          "utterance": "Tell me about the AI services for customizable game assets paper."
         },
         {
           "id": "o_pubs_digital_twins",
-          "label": "Digital Heritage Digital Twins (Elsevier)",
-          "goto": "n_pub_mementoes_digital_twins_01"
-        }
-      ],
-      "evidence": [
-        {
-          "type": "link",
-          "label": "AI Services for Customizable Game Assets (IEEE)",
-          "src": "https://ieeexplore.ieee.org/abstract/document/10976973"
+          "label": "Digital Heritage & Digital Twins (Elsevier)",
+          "goto": "n_pub_mementoes_digital_twins_01",
+          "utterance": "Tell me about the digital heritage digital twins paper."
         },
         {
-          "type": "link",
-          "label": "Digital Heritage Digital Twins (ScienceDirect)",
-          "src": "https://www.sciencedirect.com/science/article/pii/S2212054825000530"
+          "id": "o_pubs_solar_dsp_ieee",
+          "label": "Solar Panel Defect Detection (DSP 2023 / IEEE)",
+          "goto": "n_pub_solar_dsp_01",
+          "utterance": "Tell me about your DSP 2023 / IEEE solar panel defect detection paper."
         }
-      ]
+      ],
+      "evidence": []
     },
     {
       "id": "n_skills_01",
@@ -625,7 +640,7 @@
         },
         {
           "id": "o_proj_solar",
-          "label": "Solar Panel Defect Detection (IEEE)",
+          "label": "PVGnosis (solar panel defect detection)",
           "goto": "n_proj_solar_overview_01",
           "utterance": "Can you please tell me more about your solar panel defect detection project?"
         },
@@ -712,6 +727,12 @@
           "label": "Show demo videos",
           "goto": "n_proj_auto_demo_01",
           "utterance": "Can you show me demo videos?"
+        },
+        {
+          "id": "o_interpreter_back_projects",
+          "label": "Back to projects",
+          "goto": "n_proj_01",
+          "utterance": "Back to projects."
         }
       ],
       "evidence": [
@@ -926,7 +947,7 @@
     "id": "n_proj_solar_overview_01",
     "type": "answer",
     "section": "projects.solar_panel_defects",
-    "bot": "Solar Panel Defect Detection (IEEE) — a UAV RGB+thermal inspection pipeline that turns raw flight imagery into panel-level defect decisions.\n\nIt’s intentionally multi-stage: detection → interior isolation → fault classification → sanity checks via thermal statistics. The point isn’t a pretty benchmark — it’s reliability under real flight conditions (perspective distortion, thermal noise, motion blur, alignment errors).\n\nWhat the system produces:\n• per-panel localization (where each panel is)\n• a clean panel-interior mask\n• fault label + confidence\n• explainability heatmaps + thermal consistency checks to avoid “confident nonsense”\n\nIt’s built to fail conservatively: if a stage is uncertain, later checks and fallbacks prevent the pipeline from pretending certainty.",
+    "bot": "PVGnosis (solar panel defect detection) — a UAV RGB+thermal inspection pipeline that turns raw flight imagery into panel-level defect decisions.\n\nIt’s intentionally multi-stage: detection → interior isolation → fault classification → sanity checks via thermal statistics. The point isn’t a pretty benchmark — it’s reliability under real flight conditions (perspective distortion, thermal noise, motion blur, alignment errors).\n\nWhat the system produces:\n• per-panel localization (where each panel is)\n• a clean panel-interior mask\n• fault label + confidence\n• explainability heatmaps + thermal consistency checks to avoid “confident nonsense”\n\nIt’s built to fail conservatively: if a stage is uncertain, later checks and fallbacks prevent the pipeline from pretending certainty.",
     "options": [
       {
         "id": "o_solar_pipeline2",
@@ -939,15 +960,31 @@
         "label": "Limitations",
         "utterance": "What are the limitations of this system?",
         "goto": "n_proj_solar_limits_01"
+      },
+      {
+        "id": "o_interpreter_back_projects",
+        "label": "Back to projects",
+        "goto": "n_proj_01",
+        "utterance": "Back to projects."
       }
     ],
     "evidence": [
+      {
+        "type": "link",
+        "label": "Project site",
+        "src": "https://pvgnosis.eu/"
+      },
+      {
+        "type": "link",
+        "label": "IEEE publication (Solar Panel Defect Detection)",
+        "src": "https://ieeexplore.ieee.org/document/10167960"
+      },
       {
         "type": "image",
         "label": "Workflow",
         "src": "solar_panel_defects/workflow_pipeline.png"
       }
-      ]
+    ]
     },
     {
       "id": "n_proj_solar_pipeline_01",
@@ -974,7 +1011,23 @@
           "goto": "n_proj_solar_cls_01"
         }
       ],
-      "evidence": []
+      "evidence": [
+        {
+          "type": "link",
+          "label": "Project site",
+          "src": "https://pvgnosis.eu/"
+        },
+        {
+          "type": "link",
+          "label": "IEEE publication (Solar Panel Defect Detection)",
+          "src": "https://ieeexplore.ieee.org/document/10167960"
+        },
+        {
+          "type": "image",
+          "label": "Workflow",
+          "src": "solar_panel_defects/workflow_pipeline.png"
+        }
+      ]
     },
     {
       "id": "n_proj_solar_det_01",
@@ -1182,7 +1235,8 @@
         {
           "id": "o_fast_contact",
           "label": "Contact",
-          "goto": "n_contact_01"
+          "goto": "n_contact_01",
+          "utterance": "How can I contact you, and where can I see your work?"
         }
       ],
       "evidence": [
@@ -1199,7 +1253,7 @@
         {
           "type": "link",
           "label": "LinkedIn",
-          "src": "https://www.linkedin.com"
+          "src": "https://www.linkedin.com/in/georgios-terzoglou-792722348/"
         }
       ]
     },
@@ -1220,6 +1274,16 @@
           "type": "link",
           "label": "CV (PDF)",
           "src": "CV_Georgios_Terzoglou.pdf"
+        },
+        {
+          "type": "link",
+          "label": "GitHub",
+          "src": "https://github.com/Giorgos-Terzoglou"
+        },
+        {
+          "type": "link",
+          "label": "LinkedIn",
+          "src": "https://www.linkedin.com/in/georgios-terzoglou-792722348/"
         }
       ]
     },
@@ -1597,7 +1661,47 @@
         }
 
       ]
+    },
+    {
+      "id": "n_pub_solar_dsp_01",
+      "type": "answer",
+      "section": "publications",
+      "bot": "Publication — Employing deep learning framework for improving solar panel defects using drone imagery (DSP 2023 / IEEE).\n\nWhat it does (multi-stage pipeline)\n• Detect panels in UAV RGB/thermal imagery with YOLOv5.\n• Isolate the panel interior with segmentation (UNet + classic CV fallback when the mask fails).\n• Classify panels as normal vs anomalous and then into fault types (cell, multi-cell, diode, multi-diode) using EfficientNet trained on synthetic faults.\n• Add a thermal-statistics ML stage to flag defects missed by vision-only steps (high class-imbalance handled with SMOTE; Random Forest used as the best-performing baseline).\n\nWhat’s measured (not hand-waving)\n• Panel detection succeeds on test imagery at ~90% confidence.\n• Interior isolation succeeds on ~87% of test images (with fallback logic).\n• Classification reports strong F1 for no-fault and solid average F1 across fault classes.\n\nBottom line: it’s an end-to-end inspection pipeline designed for real drone capture noise — not a single-model demo.",
+      "options": [
+        {
+          "id": "o_pub_solar_dsp_back_pubs",
+          "label": "Back to publications",
+          "goto": "n_pubs_01",
+          "utterance": "Back to publications."
+        },
+        {
+          "id": "o_pub_solar_dsp_back_projects",
+          "label": "Back to projects",
+          "goto": "n_proj_01",
+          "utterance": "Back to projects."
+        },
+        {
+          "id": "o_pub_solar_dsp_back_pvgnosis",
+          "label": "Back to PVGNOSIS",
+          "goto": "n_proj_solar_overview_01",
+          "utterance": "Back to PVGNOSIS."
+        }
+
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "DSP 2023 paper (PDF)",
+          "src": "https://2025.ic-dsp.org/wp-content/uploads/2023/05/DSP2023-97.pdf"
+        },
+        {
+          "type": "link",
+          "label": "IEEE entry",
+          "src": "https://ieeexplore.ieee.org/document/10167960"
+        }
+      ]
     }
+
 
 
 

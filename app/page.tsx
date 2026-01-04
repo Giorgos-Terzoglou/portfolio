@@ -836,10 +836,8 @@ export default function Page() {
 
     const ev = currentNode.evidence ?? [];
 
-    // Allow videos only on deep-dive nodes
-    const allowVideo =
-      /deep|demo|pipeline|stage|breakdown/i.test(currentNode.id) ||
-      /deep|demo|pipeline|stage|breakdown/i.test(currentNode.section);
+    // Allow videos when the node explicitly includes them (node author decides)
+    const allowVideo = ev.some((e) => e.type === "video");
 
     const filtered = allowVideo ? ev : ev.filter((e) => e.type !== "video");
 
@@ -1179,32 +1177,13 @@ export default function Page() {
             </div>
 
             <div className="p-5 space-y-3 lg:overflow-y-auto lg:min-h-0 lg:flex-1">
-              {evidence.length === 0 ? (
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/70">
-                  No evidence attached to this node yet.
-                  <div className="mt-2 text-xs text-white/50">
-                    Add images/videos/links in <code className="text-white/80">flowV1.json</code> under this node’s
-                    <code className="text-white/80"> evidence</code>.
-                  </div>
-                </div>
-              ) : (
-                evidence.map((ev, i) => <EvidenceCard key={i} ev={ev} />)
-              )}
+              {evidence.length === 0 ? null : evidence.map((ev, i) => <EvidenceCard key={i} ev={ev} />)}
 
               {(currentNode?.evidence?.length ?? 0) > MAX_EVIDENCE && (
                 <div className="text-xs text-white/50">
                   Showing {MAX_EVIDENCE} items. (Rule: keep evidence focused.)
                 </div>
               )}
-            </div>
-
-            <div className="px-5 pb-5">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <div className="text-xs text-white/60 mb-2">Pro tip</div>
-                <div className="text-sm text-white/80">
-                  Fancy UI doesn’t matter if proof is buried. Keep answers short, then reveal evidence with one click.
-                </div>
-              </div>
             </div>
           </div>
         </div>
