@@ -1,0 +1,1605 @@
+{
+  "meta": {
+    "version": "v1",
+    "botName": "Terzo",
+    "modeDefault": "recruiter",
+    "modes": [
+      "recruiter",
+      "technical"
+    ],
+    "primaryRule": "User is interviewer. Terzo answers. Navigation is buttons + topic chips. Typed input is optional but routes only via explicit intents (no embeddings).",
+    "evidenceRule": "Never show more than 6 visuals at once. Videos only in deep-dive nodes."
+  },
+  "assets": {
+    "basePath": "",
+    "projects": {
+      "autonomous_driving": {
+        "md": "autonomous_driving/autonomous_driving_story.md",
+        "images": {
+          "lane": "autonomous_driving/lane_detection&steering_advice.png",
+          "signs_cls": "autonomous_driving/signs_classification.png",
+          "signs_det": "autonomous_driving/signs_detection.png",
+          "tl_cls": "autonomous_driving/traffic_light_classification.png",
+          "dist": "autonomous_driving/detection&distance.png",
+          "drive_seg": "autonomous_driving/drivable_area_segmentation.png",
+          "night_dificult": "autonomous_driving/night_dificult.png"
+        },
+        "videos": {
+          "trafficSigns": "autonomous_driving/trafficSigns.mp4",
+          "trafficSignsAndDistances": "autonomous_driving/trafficSigns_and_distances.mp4"
+        },
+        "links": {
+          "repo": "https://github.com/Giorgos-Terzoglou/Convolutional-neural-network-for-autonomous-driving-in-Python"
+        }
+      },
+      "solar_panel_defects": {
+        "md": "solar_panel_defects/solar_panel_defect_detection_story.md",
+        "images": {
+          "workflow": "solar_panel_defects/workflow_pipeline.png",
+          "panel_det": "solar_panel_defects/panel_detection.png",
+          "panel_seg": "solar_panel_defects/panel_segmentation.png",
+          "panel_det_full": "solar_panel_defects/panel_detection_full_pipeline.png",
+          "panel_cls": "solar_panel_defects/panel_classification.png"
+        },
+        "links": {
+          "paper": "https://ieeexplore.ieee.org/document/10167960"
+        }
+      },
+      "traffic_technique": {
+          "md": "traffic_technique/traffic_technique_story.md",
+          "links": {
+            "company": "https://www.traffictech.gr"
+          }
+        },
+        "interpreter": {
+          "links": {
+            "website": "https://www.interpreter-h2020.eu/"
+          }
+        },
+        "mementoes": {
+          "links": {
+            "website": "https://mementoes.eu/#"
+          }
+        }
+      },
+    "globalLinks": {
+      "cv_pdf": "CV_Georgios_Terzoglou.pdf"
+    }
+  },
+  "ui": {
+    "topicChips": [
+      {
+        "id": "chip_summary",
+        "label": "Summary",
+        "goto": "n_summary_01"
+      },
+      {
+        "id": "chip_experience",
+        "label": "Experience",
+        "goto": "n_exp_01"
+      },
+      {
+        "id": "chip_projects",
+        "label": "Projects",
+        "goto": "n_proj_01"
+      },
+      {
+        "id": "chip_skills",
+        "label": "Skills",
+        "goto": "n_skills_01"
+      },
+      {
+        "id": "chip_publications",
+        "label": "Publications",
+        "goto": "n_pubs_01"
+      },
+      {
+        "id": "chip_education",
+        "label": "Education",
+        "goto": "n_edu_01"
+      },
+      {
+        "id": "chip_contact",
+        "label": "Contact",
+        "goto": "n_contact_01"
+      },
+      {
+        "id": "chip_fast",
+        "label": "60-sec overview",
+        "goto": "n_fast_01"
+      }
+    ],
+    "alwaysVisibleControls": [
+      "repeat_question",
+      "change_answer",
+      "timeline",
+      "switch_mode",
+      "switch_project",
+      "contact"
+    ]
+  },
+  "intents": {
+    "routingRules": [
+      {
+        "intent": "projects",
+        "keywords": [
+          "project",
+          "projects",
+          "work",
+          "portfolio"
+        ],
+        "goto": "n_proj_01"
+      },
+      {
+        "intent": "skills",
+        "keywords": [
+          "skills",
+          "stack",
+          "tools",
+          "tech"
+        ],
+        "goto": "n_skills_01"
+      },
+      {
+        "intent": "experience",
+        "keywords": [
+          "experience",
+          "roles",
+          "jobs",
+          "certh",
+          "quento",
+          "traffic"
+        ],
+        "goto": "n_exp_01"
+      },
+      {
+        "intent": "publications",
+        "keywords": [
+          "paper",
+          "publication",
+          "ieee",
+          "research"
+        ],
+        "goto": "n_pubs_01"
+      },
+      {
+        "intent": "education",
+        "keywords": [
+          "education",
+          "degree",
+          "msc",
+          "thesis"
+        ],
+        "goto": "n_edu_01"
+      },
+      {
+        "intent": "contact",
+        "keywords": [
+          "contact",
+          "email",
+          "linkedin",
+          "github"
+        ],
+        "goto": "n_contact_01"
+      },
+      {
+        "intent": "summary",
+        "keywords": [
+          "summary",
+          "overview",
+          "about",
+          "who are you"
+        ],
+        "goto": "n_summary_01"
+      }
+    ],
+    "fallback": {
+      "reply": "Pick a topic and I’ll answer like you’re interviewing me.",
+      "showChips": true
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_start_01",
+      "type": "question",
+      "section": "start",
+      "bot": "Before we start: what are you evaluating today?",
+      "options": [
+        {
+          "id": "o_start_systems",
+          "label": "End-to-end ML systems",
+          "goto": "n_proj_01"
+        },
+        {
+          "id": "o_start_research",
+          "label": "Research & publications",
+          "goto": "n_pubs_01"
+        },
+        {
+          "id": "o_start_prod",
+          "label": "Production & MLOps",
+          "goto": "n_mlop_01"
+        },
+        {
+          "id": "o_start_fast",
+          "label": "Quick overview (60 seconds)",
+          "goto": "n_fast_01"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_summary_01",
+      "type": "answer",
+      "section": "summary",
+      "bot": "I’m a Machine Learning Engineer focused on building ML systems that run in production — especially computer vision, NLP/RAG, time-series forecasting, and MLOps. I’ve worked across research (CERTH, peer-reviewed IEEE work) and industry (production pipelines, deployed systems).",
+      "options": [
+        {
+          "id": "o_sum_projects",
+          "label": "Flagship projects",
+          "utterance": "Show me your flagship projects.",
+          "goto": "n_proj_01"
+        },
+        {
+          "id": "o_sum_exp",
+          "label": "Walk through experience",
+          "goto": "n_exp_01"
+        },
+        {
+          "id": "o_sum_skills",
+          "label": "What’s your tech stack?",
+          "goto": "n_skills_01"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "CV (PDF)",
+          "src": "CV_Georgios_Terzoglou.pdf"
+        }
+      ]
+    },
+    {
+      "id": "n_exp_01",
+      "type": "question",
+      "section": "experience",
+      "bot": "Which part of my experience do you want to dig into?",
+      "options": [
+        {
+          "id": "o_exp_quento",
+          "label": "Quento (RAG + production pipelines)",
+          "goto": "n_exp_quento_01"
+        },
+        {
+          "id": "o_exp_certh",
+          "label": "CERTH (CV + EU projects + publication)",
+          "goto": "n_exp_certh_01"
+        },
+        {
+          "id": "o_exp_tt",
+          "label": "Traffic Technique (time-series + deployment)",
+          "goto": "n_exp_tt_01"
+        },
+        {
+          "id": "o_exp_ownership",
+          "label": "What do you own end-to-end?",
+          "goto": "n_exp_ownership_01"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_exp_ownership_01",
+      "type": "answer",
+      "section": "experience",
+      "bot": "Typically I own the full lifecycle: data ingestion/validation → modeling & evaluation → deployment (FastAPI/Docker) → monitoring → retraining triggers and versioning. I’m not just training models; I’m shipping systems.",
+      "options": [
+        {
+          "id": "o_own_projects",
+          "label": "Show proof via projects",
+          "goto": "n_proj_01"
+        },
+        {
+          "id": "o_own_mlop",
+          "label": "Tell me about MLOps practices",
+          "goto": "n_mlop_01"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_exp_quento_01",
+      "type": "answer",
+      "section": "experience",
+      "bot": "At Quento I build and maintain production ML pipelines and RAG-based chatbots. The focus is reliability, latency, throughput, and guardrails — not just demos.",
+      "options": [
+        {
+          "id": "o_q_rag",
+          "label": "RAG design choices",
+          "goto": "n_rag_01"
+        },
+        {
+          "id": "o_q_prod",
+          "label": "How do you deploy/monitor?",
+          "goto": "n_mlop_01"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_exp_certh_01",
+      "type": "answer",
+      "section": "experience",
+      "bot": "At CERTH I worked on drone-based industrial inspection and other CV/RAG initiatives, led datasets and modeling, and authored an IEEE publication. The work emphasized research-to-production transitions and measurable impact.",
+      "options": [
+        {
+          "id": "o_c_solar",
+          "label": "Show the Solar Panel IEEE project",
+          "goto": "n_proj_solar_01"
+        },
+        {
+          "id": "o_c_cv",
+          "label": "Other CV work (overview)",
+          "goto": "n_skills_cv_01"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "IEEE Solar Panel Paper",
+          "src": "https://ieeexplore.ieee.org/document/10167960"
+        }
+      ]
+    },
+    {
+      "id": "n_exp_tt_01",
+      "type": "answer",
+      "section": "experience",
+      "bot": "At Traffic Technique I built time-series forecasting models (LSTM/Transformer) and helped productionize retraining/monitoring workflows. The system scaled to 45+ intersections and supported broader city-wide deployment.",
+      "options": [
+        {
+          "id": "o_tt_project",
+          "label": "Open Traffic Technique project view",
+          "goto": "n_proj_tt_01"
+        },
+        {
+          "id": "o_tt_timeseries",
+          "label": "Time-series approach details",
+          "goto": "n_timeseries_01"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "Traffic Technique (company)",
+          "src": "https://www.traffictech.gr"
+        }
+      ]
+    },
+    {
+      "id": "n_edu_01",
+      "type": "answer",
+      "section": "education",
+      "bot": "I hold an MSc in Electrical & Computer Engineering. My thesis focused on CNN-based approaches for autonomous driving and building an integrated perception-to-decision pipeline.",
+      "options": [
+        {
+          "id": "o_edu_thesis",
+          "label": "Show the Autonomous Driving project",
+          "goto": "n_proj_auto_overview_01",
+          "utterance": "Can you tell me more about your autonomous driving thesis project?"
+        },
+        {
+          "id": "o_edu_pubs",
+          "label": "Show publications",
+          "goto": "n_pubs_01"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "Autonomous Driving Repo",
+          "src": "https://github.com/Giorgos-Terzoglou/Convolutional-neural-network-for-autonomous-driving-in-Python"
+        }
+      ]
+    },
+    {
+      "id": "n_pubs_01",
+      "type": "question",
+      "section": "publications",
+      "bot": "Pick a paper. No summaries, no fluff — just the point.",
+      "options": [
+        {
+          "id": "o_pubs_game_assets",
+          "label": "AI Services for Customizable Game Assets (IEEE)",
+          "goto": "n_pub_game_assets_01"
+        },
+        {
+          "id": "o_pubs_digital_twins",
+          "label": "Digital Heritage Digital Twins (Elsevier)",
+          "goto": "n_pub_mementoes_digital_twins_01"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "AI Services for Customizable Game Assets (IEEE)",
+          "src": "https://ieeexplore.ieee.org/abstract/document/10976973"
+        },
+        {
+          "type": "link",
+          "label": "Digital Heritage Digital Twins (ScienceDirect)",
+          "src": "https://www.sciencedirect.com/science/article/pii/S2212054825000530"
+        }
+      ]
+    },
+    {
+      "id": "n_skills_01",
+      "type": "question",
+      "section": "skills",
+      "bot": "Pick a skills area. I’ll answer with proof from projects, not a buzzword list.",
+      "options": [
+        {
+          "id": "o_sk_cv",
+          "label": "Computer Vision",
+          "goto": "n_skills_cv_01"
+        },
+        {
+          "id": "o_sk_rag",
+          "label": "NLP / RAG",
+          "goto": "n_skills_rag_01"
+        },
+        {
+          "id": "o_sk_mlop",
+          "label": "MLOps / Deployment",
+          "goto": "n_mlop_01"
+        },
+        {
+          "id": "o_sk_ts",
+          "label": "Time Series",
+          "goto": "n_timeseries_01"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_skills_cv_01",
+      "type": "answer",
+      "section": "skills",
+      "bot": "Computer Vision: detection, segmentation, classification, and explainability. Proof: autonomous driving perception modules and the UAV solar defect pipeline (YOLOv5 + UNet + EfficientNet).",
+      "options": [
+        {
+          "id": "o_cv_auto",
+          "label": "Show Autonomous Driving evidence",
+          "goto": "n_proj_auto_01"
+        },
+        {
+          "id": "o_cv_solar",
+          "label": "Show Solar Panel evidence",
+          "goto": "n_proj_solar_01"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "image",
+          "label": "Autonomous Driving: detection + distance",
+          "src": "autonomous_driving/detection&distance.png"
+        },
+        {
+          "type": "image",
+          "label": "Solar: panel detection",
+          "src": "solar_panel_defects/panel_detection.png"
+        }
+      ]
+    },
+    {
+      "id": "n_skills_rag_01",
+      "type": "answer",
+      "section": "skills",
+      "bot": "NLP/RAG: I build retrieval pipelines and chatbot services focused on latency, correctness, and guardrails. I treat RAG as an engineering system: retrieval quality, reranking, and safe fallback behaviors matter more than fancy prompts.",
+      "options": [
+        {
+          "id": "o_rag_design",
+          "label": "RAG design choices",
+          "goto": "n_rag_01"
+        },
+        {
+          "id": "o_rag_mlop",
+          "label": "Deployment & monitoring",
+          "goto": "n_mlop_01"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_mlop_01",
+      "type": "question",
+      "section": "mlops",
+      "bot": "What part of production ML do you care about?",
+      "options": [
+        {
+          "id": "o_mlop_deploy",
+          "label": "Deployment approach",
+          "goto": "n_mlop_deploy_01"
+        },
+        {
+          "id": "o_mlop_monitor",
+          "label": "Monitoring & retraining",
+          "goto": "n_mlop_monitor_01"
+        },
+        {
+          "id": "o_mlop_stack",
+          "label": "Tech stack used",
+          "goto": "n_mlop_stack_01"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_mlop_deploy_01",
+      "type": "answer",
+      "section": "mlops",
+      "bot": "I deploy models as services (typically FastAPI) inside Docker, with clean versioning and reproducible environments. The goal is stable inference, predictable performance, and easy rollback — not notebooks in production.",
+      "options": [
+        {
+          "id": "o_mlop_monitor2",
+          "label": "How do you monitor drift/perf?",
+          "goto": "n_mlop_monitor_01"
+        },
+        {
+          "id": "o_mlop_projects",
+          "label": "Show deployed-style projects",
+          "goto": "n_proj_tt_01"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_mlop_monitor_01",
+      "type": "answer",
+      "section": "mlops",
+      "bot": "I set up monitoring on model performance metrics and data quality signals, then trigger retraining based on thresholds rather than calendar schedules. I prefer automation with human visibility: dashboards, alerts, and versioned artifacts.",
+      "options": [
+        {
+          "id": "o_monitor_tt",
+          "label": "Show Traffic Technique scaling example",
+          "goto": "n_proj_tt_01"
+        },
+        {
+          "id": "o_monitor_back",
+          "label": "Back to MLOps menu",
+          "goto": "n_mlop_01"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_mlop_stack_01",
+      "type": "answer",
+      "section": "mlops",
+      "bot": "Core tools: Python, PyTorch, FastAPI, Docker, MLflow, Git/GitHub Actions, and cloud tooling (e.g., Azure/Databricks depending on project constraints). I choose tools that maximize reproducibility and operational stability.",
+      "options": [
+        {
+          "id": "o_stack_projects",
+          "label": "Show projects using this stack",
+          "goto": "n_proj_01"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_timeseries_01",
+      "type": "answer",
+      "section": "time_series",
+      "bot": "Time series: I’ve built LSTM- and Transformer-based traffic flow forecasting models and improved MAE by ~12%. The key is handling non-stationarity and building retraining/monitoring so the system stays accurate over time.",
+      "options": [
+        {
+          "id": "o_ts_tt",
+          "label": "Open Traffic Technique project",
+          "goto": "n_proj_tt_01"
+        },
+        {
+          "id": "o_ts_mlop",
+          "label": "Talk MLOps for time-series",
+          "goto": "n_mlop_monitor_01"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "Traffic Technique",
+          "src": "https://www.traffictech.gr"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_01",
+      "type": "question",
+      "section": "projects",
+      "bot": "Pick a project. I’ll keep it tight and show proof.",
+      "options": [
+        {
+          "id": "o_proj_auto",
+          "label": "Autonomous Driving (camera-only)",
+          "goto": "n_proj_auto_overview_01",
+          "utterance": "Can you please tell me more about your autonomous driving project?"
+        },
+        {
+          "id": "o_proj_solar",
+          "label": "Solar Panel Defect Detection (IEEE)",
+          "goto": "n_proj_solar_overview_01",
+          "utterance": "Can you please tell me more about your solar panel defect detection project?"
+        },
+        {
+          "id": "o_proj_tt",
+          "label": "Adaptive Traffic Control (production)",
+          "goto": "n_proj_tt_overview_01",
+          "utterance": "Can you please tell me more about your adaptive traffic control project?"
+        },
+        {
+          "id": "o_proj_interpreter",
+          "label": "INTERPRETER (H2020 — smart grid tools)",
+          "goto": "n_proj_interpreter_overview_01",
+          "utterance": "Can you tell me what you did in INTERPRETER?"
+        },
+        {
+          "id": "o_proj_mementoes",
+          "label": "MEMENTOES (digital twins + restoration AI)",
+          "goto": "n_proj_mementoes_overview_01",
+          "utterance": "Can you tell me what you built in MEMENTOES?"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_proj_auto_01",
+      "type": "question",
+      "section": "projects.autonomous_driving",
+      "bot": "Autonomous driving project — what do you want first?",
+      "options": [
+        {
+          "id": "o_auto_overview_menu",
+          "label": "Overview",
+          "goto": "n_proj_auto_overview_01",
+          "utterance": "Give me the overview."
+        },
+        {
+          "id": "o_auto_modules_menu",
+          "label": "Modules",
+          "goto": "n_proj_auto_perception_01",
+          "utterance": "Walk me through the modules."
+        },
+        {
+          "id": "o_auto_limits_menu",
+          "label": "Limitations",
+          "goto": "n_proj_auto_limits_01",
+          "utterance": "What are the limitations?"
+        },
+        {
+          "id": "o_auto_demo_menu",
+          "label": "Show demo videos",
+          "goto": "n_proj_auto_demo_01",
+          "utterance": "Show me the demo videos."
+        }
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "Repo",
+          "src": "https://github.com/Giorgos-Terzoglou/Convolutional-neural-network-for-autonomous-driving-in-Python"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_auto_overview_01",
+      "type": "answer",
+      "section": "projects.autonomous_driving",
+      "bot": "Autonomous Driving (camera-only) — a real-time-ish perception pipeline that turns a single front-camera stream into driving cues.\n\nI built an end-to-end prototype in Python/OpenCV that mixes classical CV geometry with CNN-based classification/detection/segmentation and lightweight rule-based logic.\n\nWhat the system produces:\n• lane position + steering suggestion from monocular lane geometry\n• traffic sign detection + CNN sign classification for downstream rules\n• traffic-light state classification (red/yellow/green)\n• object detection plus rough distance estimation from bbox scale (monocular heuristic)\n• a drivable-area mask (road vs non-road) to support “stay on road” decisions\n\nIt’s designed to fail loudly: confidence thresholds, sanity checks, and outputs that degrade gracefully instead of pretending certainty.",
+      "options": [
+        {
+          "id": "o_auto_modules",
+          "label": "Modules",
+          "goto": "n_proj_auto_perception_01",
+          "utterance": "Can you walk me through the modules in this project?"
+        },
+        {
+          "id": "o_auto_limits_new",
+          "label": "Limitations",
+          "goto": "n_proj_auto_limits_01",
+          "utterance": "What were the limitations of this system?"
+        },
+        {
+          "id": "o_auto_demo_new",
+          "label": "Show demo videos",
+          "goto": "n_proj_auto_demo_01",
+          "utterance": "Can you show me demo videos?"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "Repo",
+          "src": "https://github.com/Giorgos-Terzoglou/Convolutional-neural-network-for-autonomous-driving-in-Python"
+        },
+        {
+          "type": "video",
+          "label": "Signs + distance estimation (demo)",
+          "src": "/autonomous_driving/trafficSigns_and_distances.mp4"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_auto_perception_01",
+      "type": "question",
+      "section": "projects.autonomous_driving",
+      "bot": "Which module do you want me to break down?",
+      "options": [
+        {
+          "id": "o_auto_lane",
+          "label": "Lane detection & steering",
+          "goto": "n_proj_auto_lane_01",
+          "utterance": "Tell me about the lane detection + steering module."
+        },
+        {
+          "id": "o_auto_signs",
+          "label": "Traffic signs & lights",
+          "goto": "n_proj_auto_signs_01",
+          "utterance": "Tell me about traffic signs and traffic lights."
+        },
+        {
+          "id": "o_auto_dist",
+          "label": "Object detection + distance",
+          "goto": "n_proj_auto_dist_01",
+          "utterance": "Explain object detection and distance estimation."
+        },
+        {
+          "id": "o_auto_seg",
+          "label": "Drivable area segmentation",
+          "goto": "n_proj_auto_seg_01",
+          "utterance": "Explain drivable-area segmentation."
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_proj_auto_lane_01",
+      "type": "answer",
+      "section": "projects.autonomous_driving",
+      "bot": "Lane detection + steering advice\n\nThis module estimates where the car sits inside the lane and outputs a simple steering cue (keep center / drift left / drift right) using a monocular, camera-only pipeline.\n\nUnder the hood it’s classical CV with geometry:\n• color + gradient thresholding, edge extraction, and ROI masking\n• perspective assumptions to stabilize the lane region\n• line fitting (Hough / polynomial fit) to estimate lane boundaries\n• lane-center offset and curvature turned into a rule-based steering suggestion\n\nIt’s fast, explainable, and easy to debug — but it’s also brittle because it depends on visible lane paint and stable lighting.",
+      "options": [
+        {
+          "id": "o_lane_another",
+          "label": "Another module",
+          "goto": "n_proj_auto_perception_01",
+          "utterance": "Show me another module."
+        },
+        {
+          "id": "o_lane_limits",
+          "label": "Hard parts & limitations",
+          "goto": "n_proj_auto_lane_limits_01",
+          "utterance": "What were the hard parts and limitations for lane detection?"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "image",
+          "label": "Lane → steering suggestion",
+          "src": "autonomous_driving/lane_detection&steering_advice.png"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_auto_signs_01",
+      "type": "answer",
+      "section": "projects.autonomous_driving",
+      "bot": "Traffic signs + traffic lights\n\nTraffic signs (detect + classify)\nI detect sign candidates, crop ROIs, and run CNN classification to output sign label + confidence. This is tuned for small objects, so it relies on clean crops, confidence thresholds, and basic smoothing to avoid flicker.\n\nTraffic lights (state classification)\nFrom cropped regions, explicit color-based classification used for the light state (red / yellow / green). Simple temporal smoothing helps stabilize predictions frame-to-frame.\n\nThis pair is the “semantic layer” of the prototype: it converts pixels into discrete decisions that downstream rules can actually use.",
+      "options": [
+        {
+          "id": "o_signs_another",
+          "label": "Another module",
+          "goto": "n_proj_auto_perception_01",
+          "utterance": "Show me another module."
+        },
+        {
+          "id": "o_signs_limits",
+          "label": "Hard parts & limitations",
+          "goto": "n_proj_auto_signs_limits_01",
+          "utterance": "What were the hard parts and limitations for signs/lights?"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "video",
+          "label": "Traffic sign detection - classification",
+          "src": "autonomous_driving/trafficSigns.mp4"
+        },
+        {
+          "type": "image",
+          "label": "Traffic sign classification",
+          "src": "autonomous_driving/signs_classification.png"
+        },
+        {
+          "type": "image",
+          "label": "Traffic light classification",
+          "src": "autonomous_driving/traffic_light_classification.png"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_auto_dist_01",
+      "type": "answer",
+      "section": "projects.autonomous_driving",
+      "bot": "Object detection + monocular distance estimation\n\nWhat it does\nDetect objects and estimate distance using a camera-only heuristic.\n\nHow it works\n• Detector produces bounding boxes per object.\n• Distance is approximated from bbox size (e.g., width/height) assuming a fixed camera model and nominal object size.\n\nWhy it’s useful\nGood enough for a demo / sanity checks, but not reliable for real autonomy.\n\nKeywords\nmonocular distance heuristic, bbox geometry, camera FOV sensitivity, calibration assumptions.",
+      "options": [
+        {
+          "id": "o_dist_another",
+          "label": "Another module",
+          "goto": "n_proj_auto_perception_01",
+          "utterance": "Show me another module."
+        },
+        {
+          "id": "o_dist_limits",
+          "label": "Hard parts & limitations",
+          "goto": "n_proj_auto_dist_limits_01",
+          "utterance": "What were the hard parts and limitations for distance estimation?"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "image",
+          "label": "Detection + distance estimation",
+          "src": "autonomous_driving/detection&distance.png"
+        },
+        {
+          "type": "video",
+          "label": "Signs + distance estimation (demo)",
+          "src": "autonomous_driving/trafficSigns_and_distances.mp4"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_auto_seg_01",
+      "type": "answer",
+      "section": "projects.autonomous_driving",
+      "bot": "Drivable-area segmentation\n\nThis module produces a pixel-level road mask (drivable vs non-drivable) so the system can reason about “stay on road” even when lane lines are missing.\n\nPipeline:\n• run a semantic segmentation model (road vs background)\n• post-process the mask with morphology / smoothing to reduce noise\n• output a clean drivable-area mask for downstream safety logic\n\nIt’s the part that tries to survive messy roads — but camera-only segmentation still struggles with harsh lighting, shadows, worn asphalt, and the kind of inconsistent road markings you see a lot in Greece.",
+      "options": [
+        {
+          "id": "o_seg_another",
+          "label": "Another module",
+          "goto": "n_proj_auto_perception_01",
+          "utterance": "Show me another module."
+        },
+        {
+          "id": "o_seg_limits",
+          "label": "Hard parts & limitations",
+          "goto": "n_proj_auto_seg_limits_01",
+          "utterance": "What were the hard parts and limitations for drivable-area segmentation?"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "image",
+          "label": "Drivable area segmentation",
+          "src": "autonomous_driving/drivable_area_segmentation.png"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_auto_limits_01",
+      "type": "answer",
+      "section": "projects.autonomous_driving",
+      "bot": "System-level limitations (camera-only prototype)\n\n• No sensor fusion (no LiDAR/radar/IMU/GPS) → weak depth and motion understanding.\n• Heuristic distance estimation → unstable under viewpoint/FOV changes.\n• Lighting and weather sensitivity (night, glare, rain).\n• Not a safety-certified stack: demo-grade perception and simple decision rules.",
+      "options": [
+        {
+          "id": "o_limits_modules",
+          "label": "Modules",
+          "goto": "n_proj_auto_perception_01",
+          "utterance": "Can you walk me through the modules?"
+        },
+        {
+          "id": "o_limits_back_projects",
+          "label": "Back to projects",
+          "goto": "n_proj_01",
+          "utterance": "Back to projects."
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_proj_auto_demo_01",
+      "type": "answer",
+      "section": "projects.autonomous_driving",
+      "bot": "Pick a demo. (Videos only show up here to keep the evidence panel clean.)",
+      "options": [
+        {
+          "id": "o_demo_back_overview",
+          "label": "Back to overview",
+          "goto": "n_proj_auto_overview_01",
+          "utterance": "Back to the overview."
+        }
+      ],
+      "evidence": [
+          { "type": "video", "label": "Traffic signs demo", "src": "autonomous_driving/trafficSigns.mp4" },
+          { "type": "video", "label": "Signs + distances demo", "src": "/autonomous_driving/trafficSigns_and_distances.mp4" }
+      ]
+    },
+    {
+    "id": "n_proj_solar_overview_01",
+    "type": "answer",
+    "section": "projects.solar_panel_defects",
+    "bot": "Solar Panel Defect Detection (IEEE) — a UAV RGB+thermal inspection pipeline that turns raw flight imagery into panel-level defect decisions.\n\nIt’s intentionally multi-stage: detection → interior isolation → fault classification → sanity checks via thermal statistics. The point isn’t a pretty benchmark — it’s reliability under real flight conditions (perspective distortion, thermal noise, motion blur, alignment errors).\n\nWhat the system produces:\n• per-panel localization (where each panel is)\n• a clean panel-interior mask\n• fault label + confidence\n• explainability heatmaps + thermal consistency checks to avoid “confident nonsense”\n\nIt’s built to fail conservatively: if a stage is uncertain, later checks and fallbacks prevent the pipeline from pretending certainty.",
+    "options": [
+      {
+        "id": "o_solar_pipeline2",
+        "label": "Pipeline stages",
+        "utterance": "Walk me through the pipeline stages.",
+        "goto": "n_proj_solar_pipeline_01"
+      },
+      {
+        "id": "o_solar_limits2",
+        "label": "Limitations",
+        "utterance": "What are the limitations of this system?",
+        "goto": "n_proj_solar_limits_01"
+      }
+    ],
+    "evidence": [
+      {
+        "type": "image",
+        "label": "Workflow",
+        "src": "solar_panel_defects/workflow_pipeline.png"
+      }
+      ]
+    },
+    {
+      "id": "n_proj_solar_pipeline_01",
+      "type": "question",
+      "section": "projects.solar_panel_defects",
+      "bot": "Pick a stage. I’ll explain what it does, why it exists, and where it breaks.",
+      "options": [
+        {
+          "id": "o_solar_det",
+          "label": "Panel detection (YOLOv5)",
+          "utterance": "Tell me about the panel detection stage.",
+          "goto": "n_proj_solar_det_01"
+        },
+        {
+          "id": "o_solar_seg",
+          "label": "Interior isolation (UNet + CV fallback)",
+          "utterance": "Explain the segmentation and the CV fallback.",
+          "goto": "n_proj_solar_seg_01"
+        },
+        {
+          "id": "o_solar_cls",
+          "label": "Fault classification (EfficientNet + heatmaps)",
+          "utterance": "Explain the fault classification stage and explainability.",
+          "goto": "n_proj_solar_cls_01"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_proj_solar_det_01",
+      "type": "answer",
+      "section": "projects.solar_panel_defects",
+      "bot": "This stage defines what the system considers a valid asset.\n\nEach detected box becomes a single photovoltaic panel that the rest of the pipeline reasons about — geometry, thermal behavior, and fault likelihood all happen at this level.\n\nBecause everything downstream depends on it, detection is tuned to be tolerant rather than brittle: it prioritizes coverage and spatial consistency so later stages can validate or reject results instead of silently failing.",
+      "options": [
+        {
+          "id": "o_solar_backstage",
+          "label": "Back to stages",
+          "utterance": "Let's discuss another stage.",
+          "goto": "n_proj_solar_pipeline_01"
+        },
+        {
+          "id": "o_solar_det_limits",
+          "label": "Hard parts & limitations",
+          "utterance": "What were the hard parts and limitations for detection?",
+          "goto": "n_proj_solar_det_limits_01"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "image",
+          "label": "Panel detection",
+          "src": "solar_panel_defects/panel_detection.png"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_solar_seg_01",
+      "type": "answer",
+      "section": "projects.solar_panel_defects",
+      "bot": "This step extracts the true panel interior so downstream models operate only on trustworthy pixels.\n\nTo achieve this, I built a custom computer-vision pipeline to extract clean panel interiors and generate reliable training masks. That dataset was then used to train a UNet segmentation model, which handles the majority of cases accurately.\n\nWhen the learned model becomes unreliable — due to perspective distortion, glare, or incomplete edges — the system falls back to a geometry-driven CV pipeline (edges, line detection, contour completion, perspective warping). This combination significantly increases robustness and prevents segmentation failures from propagating downstream.",
+      "options": [
+        {
+          "id": "o_solar_backstage2",
+          "label": "Back to stages",
+          "utterance": "Let's discuss another stage.",
+          "goto": "n_proj_solar_pipeline_01"
+        },
+        {
+          "id": "o_solar_robust3",
+          "label": "Robustness",
+          "utterance": "Why did you go with this approach?",
+          "goto": "n_proj_solar_segm_robust_01"
+        },
+        {
+          "id": "o_solar_seg_limits",
+          "label": "Hard parts & limitations",
+          "utterance": "What were the hard parts and limitations for segmentation?",
+          "goto": "n_proj_solar_seg_limits_01"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "image",
+          "label": "Segmentation pipeline",
+          "src": "solar_panel_defects/panel_segmentation.png"
+        },
+        {
+          "type": "image",
+          "label": "Full segmentation fallback view",
+          "src": "solar_panel_defects/panel_detection_full_pipeline.png"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_solar_cls_01",
+      "type": "answer",
+      "section": "projects.solar_panel_defects",
+      "bot": "Each isolated panel is classified into fault or no-fault and, when anomalous, into specific defect types (cell, multi-cell, diode, multi-diode).\n\nThe classifier is based on EfficientNet and trained on a custom synthetic dataset, created to bridge the gap between clean lab data and noisy real UAV thermal imagery.\n\nBeyond the label, the system produces activation heatmaps that highlight the thermal regions driving the decision. This makes predictions inspectable and helps verify that the model focuses on physically meaningful defect patterns rather than background noise.",
+      "options": [
+        {
+          "id": "o_solar_backstage3",
+          "label": "Back to stages",
+          "goto": "n_proj_solar_pipeline_01"
+        },
+        {
+          "id": "o_solar_cls_limits",
+          "label": "Hard parts & limitations",
+          "utterance": "What were the hard parts and limitations for classification?",
+          "goto": "n_proj_solar_cls_limits_01"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "image",
+          "label": "Thermal → heatmap",
+          "src": "solar_panel_defects/panel_classification.png"
+        }
+      ]
+    },    
+    {
+      "id": "n_proj_tt_overview_01",
+      "type": "answer",
+      "section": "projects.traffic_technique",
+      "bot": "This system supports adaptive traffic signal control using real-time data and learned forecasts.\n\nI built and productionized traffic-flow forecasting models (LSTM and Transformer-based) that predict short-term demand per intersection, reducing MAE by ~12% compared to earlier baselines.\n\nBeyond modeling, I implemented automated retraining and monitoring workflows so performance doesn’t decay over time. The result was a system that scaled from pilot deployments to 45+ intersections, supporting city-wide rollout rather than isolated demos.",
+      "options": [
+        {
+          "id": "o_projects_back3",
+          "label": "Back to all projects",
+          "goto": "n_proj_01"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "Company site",
+          "src": "https://www.traffictech.gr"
+        }
+      ]
+    },
+    {
+      "id": "n_rag_01",
+      "type": "question",
+      "section": "rag",
+      "bot": "Which RAG part do you want to focus on?",
+      "options": [
+        {
+          "id": "o_rag_retrieval",
+          "label": "Retrieval strategy",
+          "goto": "n_rag_retrieval_01"
+        },
+        {
+          "id": "o_rag_guardrails",
+          "label": "Guardrails & reliability",
+          "goto": "n_rag_guardrails_01"
+        },
+        {
+          "id": "o_rag_deploy",
+          "label": "Serving & latency",
+          "goto": "n_rag_serving_01"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_rag_retrieval_01",
+      "type": "answer",
+      "section": "rag",
+      "bot": "I treat retrieval as the core: good chunking, metadata, hybrid signals when needed, and reranking if it improves precision. If retrieval is weak, the chatbot is a liar no matter how good the model is.",
+      "options": [
+        {
+          "id": "o_rag_guardrails2",
+          "label": "What guardrails do you use?",
+          "goto": "n_rag_guardrails_01"
+        },
+        {
+          "id": "o_rag_back",
+          "label": "Back",
+          "goto": "n_rag_01"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_rag_guardrails_01",
+      "type": "answer",
+      "section": "rag",
+      "bot": "Guardrails: intent routing, threshold gating, safe fallbacks when evidence is weak, and structured outputs. The goal is to fail safely instead of hallucinating confidently.",
+      "options": [
+        {
+          "id": "o_rag_serving2",
+          "label": "Serving & latency",
+          "goto": "n_rag_serving_01"
+        },
+        {
+          "id": "o_rag_back2",
+          "label": "Back",
+          "goto": "n_rag_01"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_rag_serving_01",
+      "type": "answer",
+      "section": "rag",
+      "bot": "Serving: FastAPI endpoints, caching where it matters, and monitoring latency/throughput. In production, predictable performance beats clever prompts.",
+      "options": [
+        {
+          "id": "o_rag_mlop2",
+          "label": "MLOps practices",
+          "goto": "n_mlop_01"
+        },
+        {
+          "id": "o_rag_back3",
+          "label": "Back",
+          "goto": "n_rag_01"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_fast_01",
+      "type": "answer",
+      "section": "fast",
+      "bot": "60-second overview: I build production-ready ML systems across Computer Vision, RAG chatbots, time series forecasting, and MLOps. Flagship proof: (1) camera-based autonomous driving thesis pipeline, (2) IEEE UAV solar defect detection pipeline, (3) real-world adaptive traffic forecasting + scaling to 45+ intersections. If you want depth, pick any project.",
+      "options": [
+        {
+          "id": "o_fast_projects",
+          "label": "Pick a project",
+          "goto": "n_proj_01"
+        },
+        {
+          "id": "o_fast_contact",
+          "label": "Contact",
+          "goto": "n_contact_01"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "CV (PDF)",
+          "src": "CV_Georgios_Terzoglou.pdf"
+        },
+        {
+          "type": "link",
+          "label": "GitHub",
+          "src": "https://github.com/Giorgos-Terzoglou"
+        },
+        {
+          "type": "link",
+          "label": "LinkedIn",
+          "src": "https://www.linkedin.com"
+        }
+      ]
+    },
+    {
+      "id": "n_contact_01",
+      "type": "answer",
+      "section": "contact",
+      "bot": "Contact: email is best. You can also check GitHub and LinkedIn. CV download is available.",
+      "options": [
+        {
+          "id": "o_contact_projects",
+          "label": "Back to projects",
+          "goto": "n_proj_01"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "CV (PDF)",
+          "src": "CV_Georgios_Terzoglou.pdf"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_auto_lane_limits_01",
+      "type": "answer",
+      "section": "projects.autonomous_driving",
+      "bot": "Lane detection — hard parts & limitations\n\n• Pure camera + classical CV (colors/edges/lines) breaks on worn lanes, shadows, glare, and overexposure.\n• Greece-style roads: missing/dirty lane markings and inconsistent paint → unstable line fitting.\n• Curves/merges/exits confuse simple geometric assumptions.\n• Result: accuracy is demo-grade; needs stronger learning-based lane models + better temporal tracking.",
+      "options": [
+        {
+          "id": "o_lane_back_overview",
+          "label": "Another module",
+          "goto": "n_proj_auto_perception_01",
+          "utterance": "Show me another module."
+        },
+        {
+          "id": "o_lane_back_modules",
+          "label": "Back to projects",
+          "goto": "n_proj_01",
+          "utterance": "Ok! Let's discuss anothor project."
+        }
+      ],
+      "evidence": [
+        {
+          "type": "image",
+          "label": "Lane → steering suggestion",
+          "src": "autonomous_driving/lane_detection&steering_advice.png"
+        }]
+    },
+    {
+      "id": "n_proj_auto_signs_limits_01",
+      "type": "answer",
+      "section": "projects.autonomous_driving",
+      "bot": "Traffic signs / lights — hard parts & limitations\n\n• Small-object problem: far signs are tiny → detector misses or misclassifies.\n• Weather/lighting: night, rain, fog, glare, backlight, motion blur reduce reliability.\n• Occlusions and clutter (trees, poles, ads) create false positives.\n• Needs stronger detection + data diversity + temporal consistency to be robust.",
+      "options": [
+        {
+          "id": "o_signs_back_overview",
+          "label": "Another module",
+          "goto": "n_proj_auto_perception_01",
+          "utterance": "Show me another module."
+        },
+        {
+          "id": "o_signs_back_modules",
+          "label": "Back to projects",
+          "goto": "n_proj_01",
+          "utterance": "Ok! Let's discuss anothor project."
+        }
+      ],
+      "evidence": [
+        {
+          "type": "image",
+          "label": "Traffic sign detection - small objects",
+          "src": "autonomous_driving/signs_detection.png"
+        },
+        {
+          "type": "image",
+          "label": "Night detection challenges",
+          "src": "autonomous_driving/night_dificult.png"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_auto_dist_limits_01",
+      "type": "answer",
+      "section": "projects.autonomous_driving",
+      "bot": "Detection + distance — hard parts & limitations\n\n• Monocular distance is a heuristic: bbox size changes with camera angle, FOV, and partial occlusion.\n• Different object sizes (car vs truck vs bike) violate the “nominal size” assumption.\n• Without calibration and depth cues, estimates drift and can be dangerously wrong.\n• Fix = calibrated camera model + learning-based depth / stereo / sensor fusion.",
+      "options": [
+        {
+          "id": "o_dist_back_overview",
+          "label": "Another module",
+          "goto": "n_proj_auto_perception_01",
+          "utterance": "Show me another module."
+        },
+        {
+          "id": "o_dist_back_modules",
+          "label": "Back to projects",
+          "goto": "n_proj_01",
+          "utterance": "Ok! Let's discuss anothor project."
+        }
+      ],
+      "evidence": [
+        {
+          "type": "image",
+          "label": "Detection + distance estimation",
+          "src": "autonomous_driving/detection&distance.png"
+        },
+        {
+          "type": "video",
+          "label": "Signs + distance estimation (demo)",
+          "src": "autonomous_driving/trafficSigns_and_distances.mp4"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_solar_det_limits_01",
+      "type": "answer",
+      "section": "projects.solar_panel_defects",
+      "bot": "Panel detection — hard parts & limitations\n\n• Motion blur and oblique viewing angles reduce box stability.\n• Small panels at altitude become a small-object problem.\n• Bright reflections and low contrast backgrounds can create false positives.\n• Errors here propagate downstream, which is why later stages add consistency checks.",
+      "options": [
+        {
+          "id": "o_solar_det_backstages",
+          "label": "Back to stages",
+          "utterance": "Show me the stages again.",
+          "goto": "n_proj_solar_pipeline_01"
+        },
+        {
+          "id": "o_lane_back_modules",
+          "label": "Back to projects",
+          "goto": "n_proj_01",
+          "utterance": "Ok! Let's discuss anothor project."
+        }
+      ],
+      "evidence": [
+        {
+          "type": "image",
+          "label": "Panel detection",
+          "src": "solar_panel_defects/panel_detection.png"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_solar_seg_limits_01",
+      "type": "answer",
+      "section": "projects.solar_panel_defects",
+      "bot": "Panel interior isolation — hard parts & limitations\n\n• UNet can fail under extreme perspective, occlusions, or strong glare.\n• Borders/frames and background clutter can leak into the mask.\n• RGB–thermal misalignment makes “clean interior” harder.\n• The CV fallback exists because real UAV capture is messy and you need a plan B.",
+      "options": [
+        {
+          "id": "o_solar_seg_backstage",
+          "label": "Back to pipeline stages",
+          "utterance": "Back to the pipeline stages.",
+          "goto": "n_proj_solar_pipeline_01"
+        },
+        {
+          "id": "o_solar_backmenu_seg",
+          "label": "Back to projects",
+          "utterance": "Ok! Let's discuss anothor project.",
+          "goto": "n_proj_01"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "image",
+          "label": "Segmentation pipeline",
+          "src": "solar_panel_defects/panel_segmentation.png"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_solar_cls_limits_01",
+      "type": "answer",
+      "section": "projects.solar_panel_defects",
+      "bot": "Fault classification — hard parts & limitations\n\n• Rare defect types lead to data imbalance; some classes needed augmentation.\n• Thermal noise + capture drift can create patterns that look like defects.\n• Without explainability, a classifier can be confidently wrong.\n• That’s why the pipeline includes heatmaps + thermal sanity checks instead of pure labels.",
+      "options": [
+        {
+          "id": "o_solar_seg_backstage",
+          "label": "Back to pipeline stages",
+          "utterance": "Back to the pipeline stages.",
+          "goto": "n_proj_solar_pipeline_01"
+        },
+        {
+          "id": "o_solar_backmenu_seg",
+          "label": "Back to projects",
+          "utterance": "Ok! Let's discuss anothor project.",
+          "goto": "n_proj_01"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "image",
+          "label": "Thermal → heatmap",
+          "src": "solar_panel_defects/panel_classification.png"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_auto_seg_limits_01",
+      "type": "answer",
+      "section": "projects.autonomous_driving",
+      "bot": "Drivable-area segmentation — hard parts & limitations\n\n• Road appearance variance (asphalt quality, patches, dirt) and harsh lighting break segmentation.\n• Rural/Greek roads without clear boundaries or markings are especially hard.\n• Shadows, puddles, and worn edges create mask noise.\n• Needs domain-specific data + temporal smoothing + uncertainty-aware outputs.",
+      "options": [
+        {
+          "id": "o_seg_back_overview",
+          "label": "Another module",
+          "goto": "n_proj_auto_perception_01",
+          "utterance": "Show me another module."
+        },
+        {
+          "id": "o_seg_back_modules",
+          "label": "Back to projects",
+          "goto": "n_proj_01",
+          "utterance": "Ok! Let's discuss anothor project."
+        }
+      ],
+      "evidence": [
+        {
+          "type": "image",
+          "label": "Drivable area segmentation",
+          "src": "autonomous_driving/drivable_area_segmentation.png"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_solar_segm_robust_01",
+      "type": "answer",
+      "section": "projects.solar_panel_defects",
+      "bot": "Segmentation is robust here because it’s not a single point of failure.\n\n1) We trained a UNet encoder–decoder on a dedicated segmentation dataset (detector-style crops + mask pairs), so the model learns the panel interior rather than background clutter.\n\n2) We don’t trust the raw mask output. We convert it into geometry with a deterministic CV post-process (Canny → contours → 4-corner check → perspective warp), which standardizes every panel into the same view.\n\n3) When the UNet prediction is noisy, we recover using a classical vision fallback (HoughLinesP → line extension → contours + warpPerspective). That fallback is why we consistently keep the true panel interior in challenging cases instead of losing the panel or keeping background.",
+      "options": [
+        {
+          "id": "o_solar_seg_backstage",
+          "label": "Back to pipeline stages",
+          "utterance": "Back to the pipeline stages.",
+          "goto": "n_proj_solar_pipeline_01"
+        },
+        {
+          "id": "o_solar_backmenu_seg",
+          "label": "Back to projects",
+          "utterance": "Ok! Let's discuss anothor project.",
+          "goto": "n_proj_01"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "image",
+          "label": "Segmentation pipeline",
+          "src": "solar_panel_defects/panel_segmentation.png"
+        },
+        {
+          "type": "image",
+          "label": "Fallback pipeline view",
+          "src": "solar_panel_defects/panel_detection_full_pipeline.png"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_solar_limits_01",
+      "type": "answer",
+      "section": "projects.solar_panel_defects",
+      "bot": "System limitations (by design, not by accident)\n\n• Data availability: some fault types are rare in real solar parks, which required synthetic data generation to train the classifier.\n• Capture conditions: UAV altitude, viewing angle, motion blur, and thermal noise directly affect detection and segmentation quality.\n• RGB–thermal alignment: small misalignments propagate into segmentation and thermal statistics, requiring careful preprocessing.\n• Not a turnkey product: deployment still requires calibration, domain adaptation, and flight protocol discipline.\n\nThese constraints are typical for real UAV inspection systems — the pipeline is designed to acknowledge them, not hide them.",
+      "options": [
+        {
+          "id": "o_solar_seg_backstage",
+          "label": "Pipeline stages",
+          "utterance": "Let's speak about the pipeline stages.",
+          "goto": "n_proj_solar_pipeline_01"
+        },
+        {
+          "id": "o_solar_backmenu_seg",
+          "label": "Back to projects",
+          "utterance": "Ok! Let's discuss anothor project.",
+          "goto": "n_proj_01"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "n_proj_interpreter_overview_01",
+      "type": "answer",
+      "section": "projects.interpreter",
+      "bot": "INTERPRETER (H2020) — smart grid management tools for DSOs/TSOs.\n\nMy contribution:\n• Built tabular ML + time-series analysis to predict when transformers / assets are likely to degrade.\n• Implemented optimization logic to prioritize actions under constraints (budget, risk, operational limits).\n• Designed retraining triggers so performance doesn’t silently decay as grid behavior drifts.\n\nProof is the project site — no hand-wavy claims.",
+      "options": [
+        {
+          "id": "o_interpreter_back_projects",
+          "label": "Back to projects",
+          "goto": "n_proj_01",
+          "utterance": "Back to projects."
+        }
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "INTERPRETER website",
+          "src": "https://www.interpreter-h2020.eu/"
+        }
+      ]
+    },
+    {
+      "id": "n_proj_mementoes_overview_01",
+      "type": "answer",
+      "section": "projects.mementoes",
+      "bot": "MEMENTOES — AI services for cultural heritage: improving imagery and enabling better 3D reconstruction for digital twins.\n\nMy contribution:\n• Image-to-image enhancement: style transfer + super-resolution for degraded/low-res visual material.\n• Support for 3D reconstruction pipelines (cleaner inputs → better geometry/texture output).\n• Active-learning style iteration to improve results faster (targeted data selection instead of brute-force labeling).\n• Packaged components as services so the stack is accessible and reusable, not trapped in notebooks.\n\nProof is the project site + the two publications.",
+      "options": [
+        {
+          "id": "o_mementoes_pub_elsevier",
+          "label": "Publication: Digital Heritage Digital Twins (Elsevier)",
+          "goto": "n_pub_mementoes_digital_twins_01",
+          "utterance": "Can you please tell me more about the digital heritage digital twins publication."
+        },
+        {
+          "id": "o_mementoes_pub_ieee_game",
+          "label": "Publication: Customizable Game Assets (IEEE)",
+          "goto": "n_pub_game_assets_01",
+          "utterance": "Can you please tell me more about the IEEE paper about customizable game assets."
+        },
+        {
+          "id": "o_mementoes_back_projects",
+          "label": "Back to projects",
+          "goto": "n_proj_01",
+          "utterance": "Back to projects."
+        }
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "MEMENTOES website",
+          "src": "https://mementoes.eu/#"
+        }
+      ]
+    },
+    {
+      "id": "n_pub_game_assets_01",
+      "type": "answer",
+      "section": "publications",
+      "bot": "Publication — AI Services for Generating Customizable Game Assets (IEEE)\n\nWhat it’s about\nA suite of user-friendly AI services that let developers turn short real-world captures into customizable game-ready assets — especially for objects of historical importance.\n\nWhat the system provides\n• enhancement + semantic enrichment services for 2D images and videos\n• 3D asset acquisition via video-based 3D reconstruction\n• parameter-driven customization so developers can steer the output (not a one-size-fits-all generator)\n\nWhy it matters\nIt lowers the cost of digitizing real objects into interactive content, while improving immersion and enabling serious games / educational applications.\n",
+      "options": [
+        {
+          "id": "o_pub_game_back_projects",
+          "label": "Back to projects",
+          "goto": "n_proj_01",
+          "utterance": "Back to projects."
+        },
+        {
+          "id": "o_pub_game_back_mementoes",
+          "label": "Back to MEMENTOES",
+          "goto": "n_proj_mementoes_overview_01",
+          "utterance": "Back to MEMENTOES."
+        }
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "IEEE link",
+          "src": "https://ieeexplore.ieee.org/abstract/document/10976973"
+        }
+      ]
+    },
+    {
+      "id": "n_pub_mementoes_digital_twins_01",
+      "type": "answer",
+      "section": "publications",
+      "bot": "Publication — Digital twins pipeline for cultural heritage (image enhancement + 3D asset creation).\n\nWhat the work delivers:\n• A semi-automated pipeline to acquire and enhance visual material, then build higher-quality 3D assets.\n• Super-resolution + style transfer used to improve the frames that feed multi-view 3D reconstruction.\n• Active-learning loop: generate/select new views and iterate to improve the final 3D result with fewer wasted cycles.\n\nThis is not “cool demos”. It’s a structured pipeline with measurable improvements.",
+      "options": [
+        {
+          "id": "o_pub_dt_back_projects",
+          "label": "Back to projects",
+          "goto": "n_proj_01",
+          "utterance": "Back to projects."
+        },
+        {
+          "id": "o_pub_dt_back_mementoes",
+          "label": "Back to MEMENTOES",
+          "goto": "n_proj_mementoes_overview_01",
+          "utterance": "Back to MEMENTOES."
+        }
+      ],
+      "evidence": [
+        {
+          "type": "link",
+          "label": "ScienceDirect link",
+          "src": "https://www.sciencedirect.com/science/article/pii/S2212054825000530"
+        },
+        {
+          "type": "image",
+          "label": "Workflow",
+          "src": "mementoes/digital_heritage/workflow.png"
+        },
+        {
+          "type": "image",
+          "label": "3d reconstruction with style transfer + super-resolution",
+          "src": "mementoes/digital_heritage/3d_recon.png"
+        },
+        {
+          "type": "image",
+          "label": "Style transfer and super-resolution",
+          "src": "mementoes/digital_heritage/style_transfer_sr.png"
+        }
+
+      ]
+    }
+
+
+
+  ]
+}
