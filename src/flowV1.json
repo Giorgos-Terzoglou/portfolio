@@ -87,6 +87,12 @@
         "utterance": "Which publications validate your systems, and what do they contribute?"
       },
       {
+        "id": "chip_education",
+        "label": "Education",
+        "goto": "n_edu_01",
+        "utterance": "What’s your academic background and thesis focus?"
+      },
+      {
         "id": "chip_contact",
         "label": "Contact",
         "goto": "n_contact_01",
@@ -184,35 +190,6 @@
   },
   "nodes": [
     {
-      "id": "n_start_01",
-      "type": "question",
-      "section": "start",
-      "bot": "Before we start: what are you evaluating today?",
-      "options": [
-        {
-          "id": "o_start_systems",
-          "label": "End-to-end ML systems",
-          "goto": "n_proj_01"
-        },
-        {
-          "id": "o_start_research",
-          "label": "Research & publications",
-          "goto": "n_pubs_01"
-        },
-        {
-          "id": "o_start_prod",
-          "label": "Production & MLOps",
-          "goto": "n_mlop_01"
-        },
-        {
-          "id": "o_start_fast",
-          "label": "Quick overview (60 seconds)",
-          "goto": "n_fast_01"
-        }
-      ],
-      "evidence": []
-    },
-    {
       "id": "n_summary_01",
       "type": "answer",
       "section": "summary",
@@ -278,25 +255,6 @@
           "label": "Traffic Technique (time-series + deployment)",
           "goto": "n_exp_tt_01",
           "utterance": "Can you tell more about your experience in Traffic Technique?"
-        }
-      ],
-      "evidence": []
-    },
-    {
-      "id": "n_exp_ownership_01",
-      "type": "answer",
-      "section": "experience",
-      "bot": "Typically I own the full lifecycle: data ingestion/validation → modeling & evaluation → deployment (FastAPI/Docker) → monitoring → retraining triggers and versioning. I’m not just training models; I’m shipping systems.",
-      "options": [
-        {
-          "id": "o_own_projects",
-          "label": "Show proof via projects",
-          "goto": "n_proj_01"
-        },
-        {
-          "id": "o_own_mlop",
-          "label": "Tell me about MLOps practices",
-          "goto": "n_mlop_01"
         }
       ],
       "evidence": []
@@ -398,18 +356,13 @@
       "id": "n_edu_01",
       "type": "answer",
       "section": "education",
-      "bot": "I hold an MSc in Electrical & Computer Engineering. My thesis focused on CNN-based approaches for autonomous driving and building an integrated perception-to-decision pipeline.",
+      "bot": "I hold an MSc in Electrical & Computer Engineering.\n\nThesis: CNN-based autonomous driving — from perception (lanes/signs/lights) to actionable driving decisions, packaged as a working end-to-end prototype.",
       "options": [
         {
           "id": "o_edu_thesis",
           "label": "Show the Autonomous Driving project",
           "goto": "n_proj_auto_overview_01",
           "utterance": "Can you tell me more about your autonomous driving thesis project?"
-        },
-        {
-          "id": "o_edu_pubs",
-          "label": "Show publications",
-          "goto": "n_pubs_01"
         }
       ],
       "evidence": [
@@ -448,108 +401,6 @@
       "evidence": []
     },
     {
-      "id": "n_skills_01",
-      "type": "question",
-      "section": "skills",
-      "bot": "Pick a skills area. I’ll answer with proof from projects, not a buzzword list.",
-      "options": [
-        {
-          "id": "o_sk_cv",
-          "label": "Computer Vision",
-          "goto": "n_skills_cv_01"
-        },
-        {
-          "id": "o_sk_rag",
-          "label": "NLP / RAG",
-          "goto": "n_skills_rag_01"
-        },
-        {
-          "id": "o_sk_mlop",
-          "label": "MLOps / Deployment",
-          "goto": "n_mlop_01"
-        },
-        {
-          "id": "o_sk_ts",
-          "label": "Time Series",
-          "goto": "n_timeseries_01"
-        }
-      ],
-      "evidence": []
-    },
-    {
-      "id": "n_skills_cv_01",
-      "type": "answer",
-      "section": "skills",
-      "bot": "Computer Vision: detection, segmentation, classification, and explainability. Proof: autonomous driving perception modules and the UAV solar defect pipeline (YOLOv5 + UNet + EfficientNet).",
-      "options": [
-        {
-          "id": "o_cv_auto",
-          "label": "Show Autonomous Driving evidence",
-          "goto": "n_proj_auto_01"
-        },
-        {
-          "id": "o_cv_solar",
-          "label": "Show Solar Panel evidence",
-          "goto": "n_proj_solar_01"
-        }
-      ],
-      "evidence": [
-        {
-          "type": "image",
-          "label": "Autonomous Driving: detection + distance",
-          "src": "autonomous_driving/detection&distance.png"
-        },
-        {
-          "type": "image",
-          "label": "Solar: panel detection",
-          "src": "solar_panel_defects/panel_detection.png"
-        }
-      ]
-    },
-    {
-      "id": "n_skills_rag_01",
-      "type": "answer",
-      "section": "skills",
-      "bot": "NLP/RAG: I build retrieval pipelines and chatbot services focused on latency, correctness, and guardrails. I treat RAG as an engineering system: retrieval quality, reranking, and safe fallback behaviors matter more than fancy prompts.",
-      "options": [
-        {
-          "id": "o_rag_design",
-          "label": "RAG design choices",
-          "goto": "n_rag_01"
-        },
-        {
-          "id": "o_rag_mlop",
-          "label": "Deployment & monitoring",
-          "goto": "n_mlop_01"
-        }
-      ],
-      "evidence": []
-    },
-    {
-      "id": "n_mlop_01",
-      "type": "question",
-      "section": "mlops",
-      "bot": "What part of production ML do you care about?",
-      "options": [
-        {
-          "id": "o_mlop_deploy",
-          "label": "Deployment approach",
-          "goto": "n_mlop_deploy_01"
-        },
-        {
-          "id": "o_mlop_monitor",
-          "label": "Monitoring & retraining",
-          "goto": "n_mlop_monitor_01"
-        },
-        {
-          "id": "o_mlop_stack",
-          "label": "Tech stack used",
-          "goto": "n_mlop_stack_01"
-        }
-      ],
-      "evidence": []
-    },
-    {
       "id": "n_mlop_deploy_01",
       "type": "answer",
       "section": "mlops",
@@ -569,25 +420,6 @@
       "evidence": []
     },
     {
-      "id": "n_mlop_monitor_01",
-      "type": "answer",
-      "section": "mlops",
-      "bot": "I set up monitoring on model performance metrics and data quality signals, then trigger retraining based on thresholds rather than calendar schedules. I prefer automation with human visibility: dashboards, alerts, and versioned artifacts.",
-      "options": [
-        {
-          "id": "o_monitor_tt",
-          "label": "Show Traffic Technique scaling example",
-          "goto": "n_proj_tt_01"
-        },
-        {
-          "id": "o_monitor_back",
-          "label": "Back to MLOps menu",
-          "goto": "n_mlop_01"
-        }
-      ],
-      "evidence": []
-    },
-    {
       "id": "n_mlop_stack_01",
       "type": "answer",
       "section": "mlops",
@@ -600,31 +432,6 @@
         }
       ],
       "evidence": []
-    },
-    {
-      "id": "n_timeseries_01",
-      "type": "answer",
-      "section": "time_series",
-      "bot": "Time series: I’ve built LSTM- and Transformer-based traffic flow forecasting models and improved MAE by ~12%. The key is handling non-stationarity and building retraining/monitoring so the system stays accurate over time.",
-      "options": [
-        {
-          "id": "o_ts_tt",
-          "label": "Open Traffic Technique project",
-          "goto": "n_proj_tt_01"
-        },
-        {
-          "id": "o_ts_mlop",
-          "label": "Talk MLOps for time-series",
-          "goto": "n_mlop_monitor_01"
-        }
-      ],
-      "evidence": [
-        {
-          "type": "link",
-          "label": "Traffic Technique",
-          "src": "https://www.traffictech.gr"
-        }
-      ]
     },
     {
       "id": "n_proj_01",
@@ -1203,25 +1010,6 @@
       "evidence": []
     },
     {
-      "id": "n_rag_serving_01",
-      "type": "answer",
-      "section": "rag",
-      "bot": "Serving: FastAPI endpoints, caching where it matters, and monitoring latency/throughput. In production, predictable performance beats clever prompts.",
-      "options": [
-        {
-          "id": "o_rag_mlop2",
-          "label": "MLOps practices",
-          "goto": "n_mlop_01"
-        },
-        {
-          "id": "o_rag_back3",
-          "label": "Back",
-          "goto": "n_rag_01"
-        }
-      ],
-      "evidence": []
-    },
-    {
       "id": "n_fast_01",
       "type": "answer",
       "section": "fast",
@@ -1270,6 +1058,11 @@
         }
       ],
       "evidence": [
+        {
+          "type": "link",
+          "label": "Email",
+          "src": "mailto:gterzoglou@gmail.com"
+        },
         {
           "type": "link",
           "label": "CV (PDF)",

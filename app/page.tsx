@@ -42,7 +42,7 @@ type Node =
 type Flow = {
   meta: { version: string; botName: string;};
   ui: {
-    topicChips: { id: string; label: string; goto: string }[];
+    topicChips: { id: string; label: string; goto: string; utterance?: string }[];
     alwaysVisibleControls: string[];
   };
   nodes: Node[];
@@ -813,15 +813,21 @@ export default function Page() {
   });
 
   const [typingBotId, setTypingBotId] = useState<string | null>(null);
+  
+
+  const [showWelcome, setShowWelcome] = useState(false);
+
   useEffect(() => {
+    // Don’t start typing while the cinematic intro is open
+    if (showWelcome) return;
+
     const firstBot = messages.find((m) => m.role === "bot");
     if (!firstBot) return;
+
     const t = window.setTimeout(() => setTypingBotId(firstBot.id), 250);
     return () => window.clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const [showWelcome, setShowWelcome] = useState(false);
+  }, [showWelcome]);
 
   const [showTimeline, setShowTimeline] = useState(false);
 
@@ -941,9 +947,9 @@ export default function Page() {
   }
 
 
-  function gotoChip(nodeId: string, label?: string) {
-    const chipLabel = label ?? "Open section";
-    pushTurn(chipLabel, nodeId, "chip");
+  function gotoChip(nodeId: string, label?: string, utterance?: string) {
+    const userText = utterance ?? label ?? "Open section";
+    pushTurn(userText, nodeId, "chip");
   }
 
   if (!currentNode) {
@@ -1022,7 +1028,7 @@ export default function Page() {
           {F.ui.topicChips.map((c) => (
             <button
               key={c.id}
-              onClick={() => gotoChip(c.goto, c.label)}
+              onClick={() => gotoChip(c.goto, c.label, c.utterance)}
               className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/80 hover:bg-white/10 hover:text-white transition"
             >
               {c.label}
@@ -1050,13 +1056,6 @@ export default function Page() {
                 >
                   <History className="w-4 h-4 text-white/70" />
                   Timeline
-                </button>
-                <button
-                  onClick={repeatQuestion}
-                  className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs hover:bg-white/10 transition inline-flex items-center gap-2"
-                >
-                  <RotateCcw className="w-4 h-4 text-white/70" />
-                  Repeat
                 </button>
                 <button
                   onClick={changeAnswer}
@@ -1139,7 +1138,7 @@ export default function Page() {
             <div className="border-t border-white/10 px-5 py-4">
               <div className="flex items-center gap-3">
                 <input
-                  placeholder="Optional: type a question (routes via topic keywords only)…"
+                  placeholder="Optional: type a question"
                   className="flex-1 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-cyan-400/40"
                   onKeyDown={(e) => {
                     if (e.key !== "Enter") return;
