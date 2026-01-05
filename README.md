@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Terzo — Evidence-First Portfolio
 
-## Getting Started
+**Live:** https://portfolio-six-nu-sttotzohgd.vercel.app/
 
-First, run the development server:
+Terzo is an evidence-first portfolio for **Georgios Terzoglou**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+It’s designed as a structured interview experience: instead of scrolling through static pages, you navigate topics the same way an interviewer would — experience, projects, publications — with proof attached wherever it matters.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+If something can’t be backed up, it doesn’t belong here.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## What this is (and what it’s not)
 
-## Learn More
+**This is:**
+- A deterministic, guided walkthrough of real experience
+- Focused on systems, pipelines, and outcomes
+- Backed by concrete evidence (code, demos, papers, project sites)
 
-To learn more about Next.js, take a look at the following resources:
+**This is not:**
+- A chatbot
+- A marketing landing page
+- A keyword-stuffed CV replacement
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## How to use it
 
-## Deploy on Vercel
+Use the topic chips at the top to navigate:
+- **Experience** — end-to-end ownership in production and research
+- **Projects** — flagship systems with architecture, trade-offs, and limitations
+- **Publications** — applied research tied to real systems
+- **Education** — academic background and thesis
+- **Contact** — email, CV, and professional links
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The interface is intentionally constrained:  
+you can’t “chat” freely — input routes you to the correct section based on intent.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Design philosophy
+
+- **Evidence first**: claims appear only where proof exists
+- **Short answers**: details are revealed on demand
+- **No fluff**: no buzzwords, no padding, no vanity metrics
+- **Interview-oriented**: mirrors how technical discussions actually happen
+
+---
+
+## Tech stack (high level)
+
+- **Frontend:** React / Next.js
+- **State & flow:** deterministic JSON-driven interview graph
+- **Deployment:** Vercel
+- **Media:** static assets + embedded demos
+
+The core logic lives in a single flow definition that controls navigation, answers, and evidence.
+
+---
+
+## Why this format
+
+Most portfolios optimize for scrolling.  
+This one optimizes for **decision-making**.
+
+If you’re evaluating engineering depth, system thinking, or real-world impact, this format gets you there faster.
+
+---
+
+## Contact
+
+- **Email:** available in the Contact section
+- **GitHub / LinkedIn:** linked directly in the portfolio
+- **CV:** downloadable from the Contact section
+
+---
+
+If you’re reviewing this as a recruiter or engineer:  
+start with **Experience**, then jump into **Projects** for depth.
