@@ -414,8 +414,7 @@ function CinematicIntro({
                             <span className="text-white/90 font-semibold">
                               Georgios Terzoglou
                             </span>
-                            . Choose a topic chip and I’ll run a tight interview. If an answer can’t
-                            be backed up, it doesn’t ship.
+                            . Pick a topic and I’ll walk you through real experience, real systems, and real outcomes.
                           </div>
 
                           <div className="mt-4 flex flex-wrap items-center gap-3">
