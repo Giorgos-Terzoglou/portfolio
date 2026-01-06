@@ -692,8 +692,8 @@ function RobotAvatar({ blinkNow = false }: { blinkNow?: boolean }) {
           cy="48"
           r={7}
           fill="#22d3ee"
-          initial={{ r: 7 }}
-          animate={{ r: [7, 6.5, 7] }}
+          animate={{ scale: [1, 0.93, 1] }}
+          style={{ transformOrigin: "center" }}
           transition={{ repeat: Infinity, duration: 2.2, delay: 0.2 }}
         />
         <circle cx="36" cy="48" r="3" fill="#08101d" />
@@ -983,17 +983,20 @@ export default function Page() {
   }
 
   if (!welcomeResolved) {
-    // prevents first-paint showing the chat for a split second
     return <div className="min-h-screen bg-[#070b14] text-white" />;
   }
-  return (
-    <>
-    <CinematicIntro
-      open={showWelcome}
-      onClose={() => setShowWelcome(false)}
-      blinkNow={blinkNow}
-    />
 
+  if (showWelcome) {
+    return (
+      <CinematicIntro
+        open={true}
+        onClose={() => setShowWelcome(false)}
+        blinkNow={blinkNow}
+      />
+    );
+  }
+
+  return (
     <div className="min-h-screen bg-[#070b14] text-white overflow-hidden">
       {/* Ambient background */}
       <div className="pointer-events-none fixed inset-0">
@@ -1264,6 +1267,5 @@ export default function Page() {
         )}
       </AnimatePresence>
     </div>
-  </>
-);
+  );
 }
