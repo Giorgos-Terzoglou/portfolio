@@ -356,7 +356,7 @@ function CinematicIntro({
                   </div>
 
                   {/* RIGHT: BOOT → HERO */}
-                  <div className="relative p-5 sm:p-7 md:p-12 border-t md:border-t-0 md:border-l border-white/10">
+                  <div className="relative p-5 sm:p-7 md:p-12 border-t md:border-t-0 md:border-l border-white/10 flex flex-col max-h-[calc(100svh-15vh-24px)] overflow-y-auto">
                     <AnimatePresence mode="wait">
                       {phase === "boot" ? (
                         <motion.div
@@ -417,8 +417,7 @@ function CinematicIntro({
                             . Pick a topic and I’ll walk you through real experience, real systems, and real outcomes.
                           </div>
 
-                          <div className="mt-4 sticky bottom-0 -mx-4 px-4 py-3 flex flex-wrap items-center gap-3 bg-gradient-to-t from-black/25 via-black/10 to-transparent">
-
+                          <div className="mt-auto -mx-4 px-4 pt-4 pb-2 flex flex-wrap items-center gap-3 bg-transparent border-t border-white/10">
                             <button
                               onMouseDown={startHold}
                               onMouseUp={cancelHold}
