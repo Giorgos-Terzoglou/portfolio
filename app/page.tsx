@@ -232,7 +232,7 @@ function CinematicIntro({
 
           {/* Slow camera push-in */}
           <motion.div
-            className="absolute inset-0 flex items-center justify-center px-3 sm:px-6"
+            className="relative min-h-[100svh] flex items-start sm:items-center justify-center px-3 sm:px-6 py-6"
             initial={reduceMotion ? { scale: 1 } : { scale: 1.02 }}
             animate={reduceMotion ? { scale: 1 } : { scale: 1 }}
             transition={{ duration: 2.4, ease: "easeOut" }}
@@ -417,7 +417,8 @@ function CinematicIntro({
                             . Pick a topic and I’ll walk you through real experience, real systems, and real outcomes.
                           </div>
 
-                          <div className="mt-4 flex flex-wrap items-center gap-3">
+                          <div className="mt-4 sticky bottom-0 -mx-4 px-4 py-3 flex flex-wrap items-center gap-3 bg-gradient-to-t from-black/25 via-black/10 to-transparent">
+
                             <button
                               onMouseDown={startHold}
                               onMouseUp={cancelHold}
@@ -1215,11 +1216,11 @@ export default function Page() {
       <AnimatePresence>
         {showTimeline && (
           <motion.div
-            className="fixed inset-0 z-50 grid place-items-center bg-black/60 p-6"
+            className="fixed inset-0 z-[300] bg-[#040713] text-white overflow-y-auto overscroll-contain"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setShowTimeline(false)}
+            transition={{ duration: 0.55 }}
           >
             <motion.div
               className="w-full max-w-2xl rounded-3xl border border-white/10 bg-[#0a1020]/90 backdrop-blur-xl p-5"
