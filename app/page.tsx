@@ -814,7 +814,8 @@ export default function Page() {
   const [typingBotId, setTypingBotId] = useState<string | null>(null);
   
 
-  const [showWelcome, setShowWelcome] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [welcomeResolved, setWelcomeResolved] = useState(false);
 
   useEffect(() => {
     // Don’t start typing while the cinematic intro is open
@@ -853,13 +854,34 @@ export default function Page() {
 
   useEffect(() => {
     const key = "terzo_welcome_seen";
-    const seen = typeof window !== "undefined" && sessionStorage.getItem(key);
+    const seen = sessionStorage.getItem(key);
 
-    if (!seen) {
+    if (seen) {
+      setShowWelcome(false);
+    } else {
       setShowWelcome(true);
       sessionStorage.setItem(key, "1");
     }
+
+    setWelcomeResolved(true);
   }, []);
+
+  useEffect(() => {
+    if (!welcomeResolved) return;
+
+    if (showWelcome) {
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+    } else {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+    };
+  }, [showWelcome, welcomeResolved]);
 
 
   useEffect(() => {
@@ -927,14 +949,6 @@ export default function Page() {
   }
 
 
-  function repeatQuestion() {
-    // no state change; just a little shake animation by toggling a key
-    // we’ll do it visually via a CSS pulse on the current bubble (handled below)
-    setPulse((p) => p + 1);
-  }
-
-  const [pulse, setPulse] = useState(0);
-
   function jumpTo(index: number) {
     setNodeHistory((h) => {
       const nh = h.slice(0, index + 1);
@@ -965,6 +979,10 @@ export default function Page() {
     );
   }
 
+  if (!welcomeResolved) {
+    // prevents first-paint showing the chat for a split second
+    return <div className="min-h-screen bg-[#070b14] text-white" />;
+  }
   return (
     <>
     <CinematicIntro
