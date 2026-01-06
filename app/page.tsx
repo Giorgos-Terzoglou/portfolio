@@ -186,9 +186,6 @@ function CinematicIntro({
           {/* Esc to close */}
           <EscToClose onClose={onClose} />
 
-          {/* Click outside to close (keep if you like it; remove onClick to disable) */}
-          <div className="absolute inset-0" onClick={onClose} />
-
           {/* Letterbox bars */}
           <motion.div
             className="pointer-events-none absolute left-0 right-0 top-0 h-[7vh] md:h-[10vh] bg-black"
@@ -310,7 +307,7 @@ function CinematicIntro({
                     <div className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10 opacity-50" />
                     <div className="pointer-events-none absolute left-1/2 top-1/2 h-[640px] w-[640px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5 opacity-50" />
 
-                    <div className="relative flex items-center justify-center min-h-[clamp(180px,32vh,340px)]">
+                    <div className="relative flex items-center justify-center min-h-[120px] sm:min-h-[clamp(180px,32vh,340px)]">
                       <motion.div
                         initial={
                           reduceMotion
@@ -1216,6 +1213,7 @@ export default function Page() {
         {showTimeline && (
           <motion.div
             className="fixed inset-0 z-[300] bg-[#040713] text-white overflow-y-auto overscroll-contain"
+            style={{ WebkitOverflowScrolling: "touch" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
