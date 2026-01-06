@@ -679,17 +679,20 @@ function RobotAvatar({ blinkNow = false }: { blinkNow?: boolean }) {
         <motion.circle
           cx="36"
           cy="48"
-          r="7"
+          r={7}
           fill="#22d3ee"
+          initial={{ scaleY: 1 }}
           animate={blinkNow ? { scaleY: 0.12 } : { scaleY: 1 }}
           transition={blinkNow ? { duration: 0.12 } : { duration: 0.2 }}
           style={{ transformOrigin: "center" }}
         />
+
         <motion.circle
           cx="56"
           cy="48"
-          r="7"
+          r={7}
           fill="#22d3ee"
+          initial={{ r: 7 }}
           animate={{ r: [7, 6.5, 7] }}
           transition={{ repeat: Infinity, duration: 2.2, delay: 0.2 }}
         />
